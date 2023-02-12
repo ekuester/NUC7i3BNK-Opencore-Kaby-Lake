@@ -2,6 +2,13 @@
 
 English
 
+- **02-12-2023** by EK
+
+	**OpenCore**
+	- added complete EFI folder for macOS on a NUC7i3BNK:
+		- kext files are updated with [**OpenCore Auxiliary Tools**](https://github.com/ic005k/OCAuxiliaryTools)
+		- [kext] 'Airportitlwm' v. 2.1.0_stable ready for macOS High Sierra
+
 - **01-24-2023**
 
 	**OpenCore**

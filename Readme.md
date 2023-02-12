@@ -1,20 +1,21 @@
-# macOS  on Intel NUC7i3BNH
+# macOS  on Intel NUC7i3BNH / NUC7i3BNK
 <p align="center">
-<img src="Wiki/Images/homepage_nuc7i3bnh.png" width="50%" alt="NUC7i3BNH" />
+<img src="Wiki/Images/homepage_nuc7i3bnh_front.jpg" width="40%" alt="NUC7i3BNH" />
+<img src="Wiki/Images/homepage_nuc7i3bnk_front.jpg" width="40%" alt="NUC7i3BNH" />
 </p>
 <p align="center">
 <a href="https://downloadcenter.intel.com/it/product/95066/Kit-Intel-NUC-NUC7i3BNH" target="_blank"><img src="https://img.shields.io/badge/BIOS-BNKBL357-red.svg" /></a>
 <a href="LICENSE" target="_blank"><img src="https://img.shields.io/badge/License-MIT-purple.svg" /></a>
-<a href="https://github.com/profzei/NUC7i3BNH/releases" target="_blank"><img src="https://img.shields.io/badge/Download-Releases-blue.svg" /></a>
-<a href="https://github.com/profzei/NUC7i3BNH/wiki" target="_blank"><img src="https://img.shields.io/badge/Support-Wiki-green.svg" /></a>
+<a href="https://github.com/ekuester/NUC7i3BNK-Opencore-Kaby-Lake/releases" target="_blank"><img src="https://img.shields.io/badge/Download-Releases-blue.svg" /></a>
+<a href="https://github.com/ekuester/NUC7i3BNK-Opencore-Kaby-Lake/wiki" target="_blank"><img src="https://img.shields.io/badge/Support-Wiki-green.svg" /></a>
 </p>
 
 
-#### This repo is currently compatible with macOS Big Sur and OpenCore 0.8.8
+#### This repo is currently compatible with macOS High Sierra, Catalina and Big Sur started with OpenCore 0.8.8 ...
 
-This repo contains information for getting macOS working on an **Intel NUC7i3BNH**.
+The repo contains information for getting macOS working on an **Intel NUC7i3BNH** and equally on an **Intel NUC7i3BNK** ( without place for a SSD ).
 
-This EFI is built and tested on **Big Sur 11.7**: for the moment I stick with Big Sur (20G817) since I need a machine as stable and reliable as possible as a daily driver. However Ventura/Monterey compatibility should be fine (but untested).
+This EFI is built and tested on **High Sierra 10.13.6**, **Catalina 10.15.7** and **Big Sur 11.7**: For the moment Big Sur (20G817) is enough since the machine must be as stable and reliable as possible as a daily driver. However Ventura / Monterey compatibility should be fine (but untested).
 
 **This repository is for personal purposes**
 
@@ -23,16 +24,12 @@ This EFI is built and tested on **Big Sur 11.7**: for the moment I stick with Bi
 </p>
 
 ### DISCLAIMER
-
+- Following consists mostly of the [**original repo**](https://github.com/profzei/NUC7i3BNH).
 - Read the entire README before you start.
 - I am not responsible for any damages you may cause.
 - Should you find an error or improve anything — whether in the config or in the documentation — please consider opening an issue or pull request.
-- **Complete EFI packs** are available in the [**Releases**](https://github.com/profzei/NUC7i3BNH/releases) page (please, refer to the rightside menu).
-- Please **do not clone or download** the main branch for daily use: it may include **unstable code** just because it is my repository.
-
-If you find this bootloader configuration useful, consider **giving** it **a star** to make it more visible.
-
-If you find my work useful, please consider **donating via PayPal**. [![donate](https://img.shields.io/badge/-buy%20me%20a%20coffee-orange)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TSJHK3C2BSQN6&currency_code=EUR)
+- If you find this bootloader configuration useful, consider **giving** it **a star** to make it more visible.
+- If you find my work useful, please consider **donating via PayPal**. [![donate](https://img.shields.io/badge/-buy%20me%20a%20coffee-orange)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TSJHK3C2BSQN6&currency_code=EUR)
 
 ## Overview
 
@@ -91,20 +88,22 @@ Other hardware specifications:
 
 ## BIOS Settings
 
- Update to the [latest BIOS version](https://downloadcenter.intel.com/it/product/95066/Kit-Intel-NUC-NUC7i3BNH), then load BIOS **Defaults** and finally in the **Advanced** submenu change the following settings:
+ Update to the [latest BIOS version](https://downloadcenter.intel.com/it/product/95066/Kit-Intel-NUC-NUC7i3BNH) (website in italian), then load BIOS **Defaults** and finally in the **Advanced** submenu change the following settings:
 - `Devices -> USB -> Port Device Charging Mode: Off`
 - `Devices -> USB -> USB Legacy -> Disabled`
 - `Power -> Wake on LAN from S4/S5: Stay Off`
 - `Boot -> Boot Configuration -> Network Boot: Disable`
 - `Boot -> Secure Boot -> Disable`
 
+For your convenience **BIOS file BN0089.bio** is included in the newly added efi folder. Update with the F7 method at startup.
+
 ### Generate your own SMBIOS Information
 
 For privacy reasons, all SMBIOS information has been wiped out in the configuration file `EFI/OC/config.plist`.
-- You need to generate your unique `SMBIOS` info by yourself (recommend to use [**CorpNewt's GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS)), and inject them into your `config.plist`.
+- You need to generate your unique `SMBIOS` info by yourself (recommend to use [**CorpNewt's GenSMBIOS**](https://github.com/corpnewt/GenSMBIOS)), and inject them into your `config.plist. For macOS High Sierra choose Macmini7,1 (the last model which can run High Sierra normally).
 
 **For dual-booting systems, Windows Activation may fail due to different hardware UUID generated by OpenCore**
-- According to [OpenCore Official Configuration](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf), you are highly recommended to inject the **original Windows system UUID** to `PlatformInfo -> Generic - >SystemUUID` in `EFI/OC/config.plist`: run `wmic csproduct get UUID` command in Windows PowerShell app
+- According to [OpenCore Official Configuration](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Configuration.pdf), you are highly recommended to inject the **original Windows system UUID** to `PlatformInfo -> Generic -> SystemUUID` in `EFI/OC/config.plist`: run `wmic csproduct get UUID` command in Windows PowerShell app
 
 ## Changelog
 
@@ -112,7 +111,7 @@ For privacy reasons, all SMBIOS information has been wiped out in the configurat
 See [**Current status**](Changelog.md)
 
 ## Status
-WIP...
+Work in progress ...
 
 ## USB Port Mapping on NUC chassis
 

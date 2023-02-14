@@ -95,7 +95,7 @@ Other hardware specifications:
 - `Boot -> Boot Configuration -> Network Boot: Disable`
 - `Boot -> Secure Boot -> Disable`
 
-For your convenience **BIOS file BN0089.bio** is included in the newly added efi folder. Update with the F7 method at startup.
+For your convenience **BIOS file BN0089.bio** is included in the newly added efi folder. Update with the F7 method at startup. Maybe after updating the bluetooth adapter is gone ... In this case go at startup with F2 into the BIOS, disable under Devices Bluetooth, save the changes with F10 and power-off. Disconnect the power cord for at least 10-30 seconds, plugin again, go into BIOS, enable Bluetooth, save the changes with F10 and power-off. Once more disconnect the power cord for at least 10-30 seconds, plugin again and start normally. Indeed a funny procedure - but recommended by Intel self - and all systems should go now.
 
 ### Generate your own SMBIOS Information
 
